@@ -12,14 +12,16 @@ declare(strict_types=1);
 
 namespace Qbus\IvmProBundle\Controller\FrontendModule;
 
-use Contao\CoreBundle\Controller\FrontendModule\AbstractFrontendModuleController;
 use Contao\Input;
-use Contao\ModuleModel;
-use Contao\PageModel;
 use Contao\Template;
-use Qbus\IvmProClient\Repository\UnitRepository;
+use Contao\PageModel;
+use Contao\ModuleModel;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Qbus\IvmProClient\Repository\UnitRepository;
+use Contao\CoreBundle\Exception\RedirectResponseException;
+use Contao\CoreBundle\DependencyInjection\Attribute\AsFrontendModule;
+use Contao\CoreBundle\Controller\FrontendModule\AbstractFrontendModuleController;
 
 class IvmProListController extends AbstractFrontendModuleController
 {
@@ -32,7 +34,7 @@ class IvmProListController extends AbstractFrontendModuleController
         $this->subdomain = $subdomain;
     }
 
-    protected function getResponse(Template $template, ModuleModel $model, Request $request): ?Response
+    protected function getResponse(Template $template, ModuleModel $model, Request $request): Response
     {
         $readerPage = PageModel::findByPk($model->jumpTo);
 
